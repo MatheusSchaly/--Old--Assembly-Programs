@@ -9,34 +9,35 @@ using namespace std;
 
 int main()
 {
-    int vetor1[8], vetor2[8];
+    int vector1[8], vector2[8];
     int numElementos;
     while (true) {
-        cout << "Entre com o tamanho dos vetores (max. = 8):\n";
+        cout << "Enter with array's size (max. = 8):\n";
         cin >> numElementos;
         if (numElementos > 0 && numElementos < 9) {
             break;
         }
-        cout << "Valor invalido.\n";
+        cout << "Invalid value.\n";
     }
     for (int i = 0; i < numElementos; i++) {
-        cout << "Vetor1[" << i << "] = ";
-        cin >> vetor1[i];
+        cout << "Vector1[" << i << "] = ";
+        cin >> vector1[i];
     }
     for (int i = 0; i < numElementos; i++) {
-        cout << "Vetor2[" << i << "] = ";
-        cin >> vetor2[i];
+        cout << "Vector2[" << i << "] = ";
+        cin >> vector2[i];
     }
-    int aux;
+    int temp;
     for (int i = 0; i < numElementos; i++) {
-        aux = vetor1[i];
-        vetor1[i] = vetor2[i];
-        vetor2[i] = aux;
+        temp = vector1[i];
+        vector1[i] = vector2[i];
+        vector2[i] = temp;
+    }
+    cout << "\n";
+    for (int i = 0; i < numElementos; i++) {
+        cout << "Vetor1[" << i << "] = " << vector1[i] << "\n";
     }
     for (int i = 0; i < numElementos; i++) {
-        cout << "Vetor1[" << i << "] = " << vetor1[i] << endl;
-    }
-    for (int i = 0; i < numElementos; i++) {
-        cout << "Vetor2[" << i << "] = " << vetor2[i] << endl;
+        cout << "Vetor2[" << i << "] = " << vector2[i] << "\n";
     }
 }
