@@ -56,13 +56,19 @@ secondCondition:
 	syscall 								#Do it
 	
 	#Restarts while
-	j while									#Jump to while
+	j 	while								#Jump to while
 exit:
+
+	#Loads array1's base address
+	la 	$t2, 	vector1							#Load array1's base address to t2 (array's base)
+	
+	#Loads array1's base address
+	la	$t5,	vector2							#Load array1's base address to t2 (array's base)
 
 	#Creates loop's index
 	addi	$t1,	$zero,	0						#Add zero and 0 and store it in t1 (loop's index)
 	
-	#First for loop to gather first array's values
+	#First for loop to gather array1's values
 for1:
 	#Loop's if condition
 	beq	$t1,	$t0,	for1Exit					#Branch to for1Exit if t1 (loop's index) is equal to t0 (arrays' size)
@@ -87,7 +93,6 @@ for1:
 	syscall									#Do it
 	
 	#Calculates the array1's addres to store the integer
-	la 	$t2, 	vector1							#Load array's base to t2 (array's base)
 	sll	$t3, 	$t1,	2						#Multiply t1 (loop's index) by 4 and put the result into t3 (bytes to be moved from array's base address)
 	add 	$t3, 	$t3, 	$t2						#Add t2 (array's base) and t3 (bytes to be moved from array's base address) and put it back into t3 (array's fully calculated address)
 	
@@ -106,7 +111,7 @@ for1Exit:
 	#Resets loop's index to 0
 	addi	$t1,	$zero,	0						#Add zero and 0 and store it in t1 (loop's index)
 	
-	#Second for loop to gather second array's values
+	#Second for loop to gather array2's values
 for2:
 	#Loop's if condition
 	beq	$t1,	$t0,	for2Exit					#Branch to for2Exit if t1 (loop's index) is equal to t0 (arrays' size)
@@ -131,9 +136,8 @@ for2:
 	syscall									#Do it
 	
 	#Calculates the array2's addres to store the integer
-	la 	$t2, 	vector2							#Load array's base to t2 (array's base)
 	sll	$t3, 	$t1,	2						#Multiply t1 (loop's index) by 4 and put the result into t3 (bytes to be moved from array's base address)
-	add 	$t3, 	$t3, 	$t2						#Add t2 (array's base) and t3 (bytes to be moved from array's base address) and put it back into t3 (array's fully calculated address)
+	add 	$t3, 	$t3, 	$t5						#Add t2 (array's base) and t3 (bytes to be moved from array's base address) and put it back into t3 (array's fully calculated address)
 	
 	#Stores the input in array
 	sw 	$v0, 	($t3)							#Store word from v0 (that has the imput) in t3 (array's fully calculated address)
@@ -156,7 +160,6 @@ for3:
 	beq	$t1,	$t0,	for3Exit					#Branch to for3Exit if t1 (loop's index) is equal to t0 (arrays' size)
 
 	#Calculates the array1's addres to load an integer
-	la	$t2,	vector1							#Load array's base to t2 (array1's base)
 	sll	$t3,	$t1,	2						#Multiply t1 (loop's index) by 4 and put the result into t3 (bytes to be moved from array's base address)
 	add	$t3,	$t3,	$t2						#Add t2 (array1's base) and t3 (bytes to be moved from array1's base address) and put it back into t3 (array1's fully calculated address)
 	
@@ -164,7 +167,6 @@ for3:
 	lw 	$t4, 	($t3)							#Load word from t3 (array1's fully calculated address) to t4 (array1's value)
 	
 	#Calculates the array2's addres to load an integer
-	la	$t5,	vector2							#Load array's base to t5 (array2's base)
 	sll	$t6,	$t1,	2						#Multiply t1 (loop's index) by 4 and put the result into t6 (bytes to be moved from array's base address)
 	add	$t6,	$t6,	$t5						#Add t5 (array2's base) and t6 (bytes to be moved from array2's base address) and put it back into t6 (array2's fully calculated address)
 	
@@ -183,7 +185,7 @@ for3:
 	#Restarts for loop
 	j 	for3								#Jump to for1
 	
-	#Exits second for loop
+	#Exits third for loop
 for3Exit:
 
 	#Prints mensagem6
@@ -215,9 +217,8 @@ for4:
 	syscall 								#Do it
 
 	#Calculates the array1's addres to load an integer
-	la 	$t2, 	vector1							#Load array's base to t2 (array's base)
 	sll	$t3, 	$t1,	2						#Multiply t1 (loop's index) by 4 and put the result into t3 (bytes to be moved from array's base address)
-	add 	$t3, 	$t3, 	$t2						#Add t2 (array's base) and t3 (bytes to be moved from array's base address) and put it back into t3 (array's fully calculated address)
+	add 	$t3, 	$t3, 	$t2						#Add t2 (array1's base) and t3 (bytes to be moved from array's base address) and put it back into t3 (array's fully calculated address)
 	
 	#Loads the input from array1
 	lw 	$t4, 	($t3)							#Load word from t3 (array1's fully calculated address) to t4 (array1's value)
@@ -238,7 +239,7 @@ for4:
 	#Restarts for loop
 	j 	for4								#Jump to for1
 	
-	#Exits second for loop
+	#Exits forth for loop
 for4Exit:
 
 	#Resets loop's index to 0
@@ -251,7 +252,7 @@ for5:
 	
 	#Prints mensagem3
 	li	$v0, 	4 							#Command to print a text
-	la	$a0, 	mensagem3 						#Load address of mensagem3 to a0
+	la	$a0, 	mensagem5 						#Load address of mensagem3 to a0
 	syscall 								#Do it
 	
 	#Prints index
@@ -265,9 +266,8 @@ for5:
 	syscall 								#Do it
 
 	#Calculates the array2's addres to load an integer
-	la 	$t2, 	vector2							#Load array's base to t2 (array's base)
 	sll	$t3, 	$t1,	2						#Multiply t1 (loop's index) by 4 and put the result into t3 (bytes to be moved from array's base address)
-	add 	$t3, 	$t3, 	$t2						#Add t2 (array's base) and t3 (bytes to be moved from array's base address) and put it back into t3 (array's fully calculated address)
+	add 	$t3, 	$t3, 	$t5						#Add t5 (array2's base) and t3 (bytes to be moved from array's base address) and put it back into t3 (array's fully calculated address)
 	
 	#Loads the input from array2
 	lw 	$t4, 	($t3)							#Load word from t3 (array1's fully calculated address) to t4 (array1's value)
@@ -288,5 +288,5 @@ for5:
 	#Restarts for loop
 	j 	for5								#Jump to for1
 	
-	#Exits second for loop
+	#Exits fifth for loop
 for5Exit:
