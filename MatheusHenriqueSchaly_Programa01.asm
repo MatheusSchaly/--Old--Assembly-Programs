@@ -13,7 +13,7 @@
 	mensagem3:	.asciiz "Vector1["					
 	mensagem4:	.asciiz "] = "		
 	mensagem5:	.asciiz "Vector2["					
-	mensagem6:	.asciiz "\n"						#Jump line
+	mensagem6:	.asciiz "\n"						#Jump linez
 	
 .text
 
@@ -33,10 +33,10 @@ while:
 	syscall									#Do it
 	
 	#Stores integer
-	move $t0, $v0								#Move to $t0 (arrays' size) the integer in v0
+	move 	$t0, 	$v0							#Move to t0 (arrays' size) the integer in v0
 
 	#While's first if condition
-	bgt 	$t0	$t1	secondCondition					#Branch to secondCondition if t0 (arrays' size) is greater than t2 (while's lower bound)							
+	bgt 	$t0	$t1	secondCondition					#Branch to secondCondition if t0 (arrays' size) is greater than t1 (while's lower bound)							
 
 	# Prints mensagem2
 	li	$v0, 	4 							#Command to print a text
@@ -60,10 +60,10 @@ secondCondition:
 exit:
 
 	#Loads array1's base address
-	la 	$t2, 	vector1							#Load array1's base address to t2 (array's base)
+	la 	$t2, 	vector1							#Load array1's base address to t2 (array1's base)
 	
-	#Loads array1's base address
-	la	$t5,	vector2							#Load array1's base address to t2 (array's base)
+	#Loads array2's base address
+	la	$t5,	vector2							#Load array2's base address to t5 (array2's base)
 
 	#Creates loop's index
 	addi	$t1,	$zero,	0						#Add zero and 0 and store it in t1 (loop's index)
@@ -80,7 +80,7 @@ for1:
 	
 	#Prints index
 	li 	$v0, 	1							#Command to print a integer
-	move 	$a0, 	$t1							#Move $t1 (loop index) to a0
+	move 	$a0, 	$t1							#Move t1 (loop index) to a0
 	syscall									#Do it
 	
 	#Prints mensagem4
@@ -123,7 +123,7 @@ for2:
 	
 	#Prints index
 	li 	$v0, 	1							#Command to print a integer
-	move 	$a0, 	$t1							#Move $t1 (loop index) to a0
+	move 	$a0, 	$t1							#Move t1 (loop index) to a0
 	syscall									#Do it
 	
 	#Prints mensagem4
@@ -137,7 +137,7 @@ for2:
 	
 	#Calculates the array2's addres to store the integer
 	sll	$t3, 	$t1,	2						#Multiply t1 (loop's index) by 4 and put the result into t3 (bytes to be moved from array's base address)
-	add 	$t3, 	$t3, 	$t5						#Add t2 (array's base) and t3 (bytes to be moved from array's base address) and put it back into t3 (array's fully calculated address)
+	add 	$t3, 	$t3, 	$t5						#Add t5 (array's base) and t3 (bytes to be moved from array's base address) and put it back into t3 (array's fully calculated address)
 	
 	#Stores the input in array
 	sw 	$v0, 	($t3)							#Store word from v0 (that has the imput) in t3 (array's fully calculated address)
@@ -146,7 +146,7 @@ for2:
 	addi 	$t1, 	$t1, 	1						#Increase t1 (loop's index) by 1
 	
 	#Restarts for loop
-	j 	for2								#Jump to for1
+	j 	for2								#Jump to for2
 	
 	#Exits second for loop
 for2Exit:
@@ -183,14 +183,14 @@ for3:
 	addi 	$t1, 	$t1, 	1						#Increase t1 (loop's index) by 1
 	
 	#Restarts for loop
-	j 	for3								#Jump to for1
+	j 	for3								#Jump to for3
 	
 	#Exits third for loop
 for3Exit:
 
 	#Prints mensagem6
 	li	$v0, 	4 							#Command to print a text
-	la	$a0, 	mensagem6 						#Load address of mensagem3 to a0
+	la	$a0, 	mensagem6 						#Load address of mensagem6 to a0
 	syscall 								#Do it
 
 	#Resets loop's index to 0
@@ -225,7 +225,7 @@ for4:
 	
 	#Prints array1 at index t1
 	li 	$v0, 	1							#Command to print a integer
-	move 	$a0, 	$t4							#Move $t4 (the value) to a0
+	move 	$a0, 	$t4							#Move t4 (the value) to a0
 	syscall									#Do it
 	
 	#Prints mensagem6
@@ -237,7 +237,7 @@ for4:
 	addi 	$t1, 	$t1, 	1						#Increase t1 (loop's index) by 1
 	
 	#Restarts for loop
-	j 	for4								#Jump to for1
+	j 	for4								#Jump to for4
 	
 	#Exits forth for loop
 for4Exit:
@@ -248,11 +248,11 @@ for4Exit:
 	#Fifth for loop to print array2's values
 for5:
 	#Loop's if condition
-	beq	$t1,	$t0,	for5Exit					#Branch to for3Exit if t1 (loop's index) is equal to t0 (arrays' size)
+	beq	$t1,	$t0,	for5Exit					#Branch to for5Exit if t1 (loop's index) is equal to t0 (arrays' size)
 	
 	#Prints mensagem3
 	li	$v0, 	4 							#Command to print a text
-	la	$a0, 	mensagem5 						#Load address of mensagem3 to a0
+	la	$a0, 	mensagem5 						#Load address of mensagem5 to a0
 	syscall 								#Do it
 	
 	#Prints index
@@ -274,7 +274,7 @@ for5:
 	
 	#Prints array2 at index t1
 	li 	$v0, 	1							#Command to print a integer
-	move 	$a0, 	$t4							#Move $t4 (the value) to a0
+	move 	$a0, 	$t4							#Move t4 (the value) to a0
 	syscall									#Do it
 	
 	#Prints mensagem6
@@ -286,7 +286,7 @@ for5:
 	addi 	$t1, 	$t1, 	1						#Increase t1 (loop's index) by 1
 	
 	#Restarts for loop
-	j 	for5								#Jump to for1
+	j 	for5								#Jump to for5
 	
 	#Exits fifth for loop
 for5Exit:
