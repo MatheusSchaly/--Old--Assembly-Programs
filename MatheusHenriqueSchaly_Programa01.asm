@@ -6,8 +6,8 @@
 .data
 
 	#Creates RAM variables
-	vector1:	.word 0, 0, 0, 0, 0, 0, 0, 0				#Inicializing vector 1
-	vector2:	.word 0, 0, 0, 0, 0, 0, 0, 0				#Inicializing vector 2
+	vector1:	.word 	0, 0, 0, 0, 0, 0, 0, 0				#Inicializing vector 1
+	vector2:	.word 	0, 0, 0, 0, 0, 0, 0, 0				#Inicializing vector 2
 	mensagem1:	.asciiz "Enter with array's size (max. = 8):\n"		#Message prompting vectors size
 	mensagem2:	.asciiz "Invalid value.\n"				#Message warning invalid value
 	mensagem3:	.asciiz "Vector1["					
@@ -60,10 +60,10 @@ secondCondition:
 exit:
 
 	#Loads array1's base address
-	la 	$t2, 	vector1							#Load array1's base address to t2 (array1's base)
+	la 	$t2, 	vector1							#Load array1's base address to t2 (array1's base address)
 	
 	#Loads array2's base address
-	la	$t5,	vector2							#Load array2's base address to t5 (array2's base)
+	la	$t5,	vector2							#Load array2's base address to t5 (array2's base address)
 
 	#Creates loop's index
 	addi	$t1,	$zero,	0						#Add zero and 0 and store it in t1 (loop's index)
