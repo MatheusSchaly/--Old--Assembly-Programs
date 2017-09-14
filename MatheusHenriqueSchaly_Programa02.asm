@@ -119,30 +119,33 @@ getPresenceExit:
 
 	#B - Calculates how many mask's bits will be moved
 	la	$t7,	mask					#Load address of mask to t7 (original mask)
-	sllv	$t7,	$t7,	$t1				#Multiply t7 (original mask) by t1 (student's number) and put the result into t7 (mask moved for t0 times)	
+	sllv	$t7,	$t7,	$t1				#Multiply t7 (original mask) by t1 (student's number) and put the result into t7 (mask bits moved for t1 times)	
 	
 	#C - If condition to check if student is or not present
-	beq	$t2,	$t6,	registerAusence			#Branch to registerAusence if t2 (student's presence) is equal to t6 (while's lower bound (that is 0))
+	beq	$t2,	$t6,	registerAusence			#Branch to registerAusence if t2 (student's presence) is equal to t6 (while's lower bound (which is 0))
 	
 	#Register a presence
 	
-	#XOR mask and presenceVector's single position
-	xor	$t5,	$t5,	$t7				#XOR (exclusive OR) t7 (mask) and t5 (presenceVector's value) and put the result into t5 (presenceVector's changed value)
+	#OR mask and presenceVector's single position
+	or	$t5,	$t5,	$t7				#OR t7 (changed mask) and t5 (presenceVector's value) then put the result into t5 (presenceVector's changed value)
 	
-	#Stores presenceVector's changed value
+	#Stores presenceVector's changed value back
 	sw 	$t5, 	($t3)					#Store word from t5 (presenceVector's changed value) in t3 (presenceVector's fully calculated address)
-	
+
 	#Restarts the whole loop
 	j 	start						#Jump to start
 
 	#Register a ausence
 registerAusence:
 
-	#OR mask and presenceVector's single position
-	or	$t5,	$t5,	$t7				#OR t7 (mask) and t5 (presenceVector's value) and put the result into t5 (presenceVector's changed value)
+	#XOR mask and 32 bits (all set to 1)
+	xori	$t7,	$t7,	0xFFFFFFFF			#XOR (exclusive OR) t7 (changed mask) and 32 bits (all set to 1) then put the result into t7 (XORed mask)
 	
-	#Stores presenceVector's changed value
+	#AND XORed mask and presenceVector's single position
+	and	$t5,	$t7,	$t5				#OR t7 (XORed mask) and t5 (presenceVector's value) then put the result into t5 (presenceVector's changed value)
+	
+	#Stores presenceVector's changed value back
 	sw 	$t5, 	($t3)					#Store word from t5 (presenceVector's changed value) in t3 (presenceVector's fully calculated address)
-
+	
 	#Restarts the whole loop
 	j 	start						#Jump to start
