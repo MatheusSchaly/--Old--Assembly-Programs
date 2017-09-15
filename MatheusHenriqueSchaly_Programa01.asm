@@ -13,7 +13,7 @@
 	mensagem3:	.asciiz "Vector1["					
 	mensagem4:	.asciiz "] = "		
 	mensagem5:	.asciiz "Vector2["					
-	mensagem6:	.asciiz "\n"						#Jump linez
+	mensagem6:	.asciiz "\n"						#Jump line
 	
 .text
 

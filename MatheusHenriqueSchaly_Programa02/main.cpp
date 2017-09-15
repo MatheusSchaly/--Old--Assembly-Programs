@@ -33,5 +33,4 @@ int main()
         } while (presence < 0 || presence > 1);
         record[myClass][student] = presence;
     }
-
 }

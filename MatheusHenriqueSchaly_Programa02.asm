@@ -1,6 +1,6 @@
 # Disciplina: Arquitetura e Organização de Computadores
 # Atividade: Avaliação 01 – Programação em Linguagem de Montagem
-# Programa 01
+# Programa 02
 # Grupo: - Matheus Henrique Schaly
 
 #Data stored in RAM
@@ -8,9 +8,11 @@
 	#Creates RAM variables
 	message1:	.asciiz		"Enter class' number (0 to 15): "
 	message2:	.asciiz		"Enter student's number (0 to 31): "
-	message3:	.asciiz		"Enger register's type (presence = 1; absence = 0): "
+	message3:	.asciiz		"Enter register's type (presence = 1; absence = 0): "
+	message4:	.asciiz		"Changed vector's word:\n"
+	message5:	.asciiz		"\n\n"
 	presenceVector:	.word		0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF 		#Create a vector with 16 elements, each of them has 32 bits, that are all set to 1
-	mask:		.word		0x00000001		#Mask with 32 bits, with only its last bit set to 1
+	mask:		.word		1			#Mask with 32 bits, with only its last bit set to 1
 
 .text
 
@@ -36,7 +38,7 @@ getClass:
 	
 	#Reads integer
 	li	$v0,	5					#Read an integer and store it in v0
-	syscall
+	syscall							#Do it
 	
 	#Stores integer
 	move	$t0,	$v0					#Move to t0 (class' number) the integer in v0
@@ -65,7 +67,7 @@ getStudent:
 	
 	#Reads integer
 	li	$v0,	5					#Read an integer and store it in v0
-	syscall
+	syscall							#Do it
 	
 	#Stores integer
 	move	$t1,	$v0					#Move to t1 (student's number) the integer in v0
@@ -89,7 +91,7 @@ getPresence:
 
 	#Prints a text
 	li	$v0,	4					#Command to print a text
-	la	$a0,	message3				#Load address of mensagem2 to a0
+	la	$a0,	message3				#Load address of mensagem3 to a0
 	syscall							#Do it
 	
 	#Reads integer
@@ -112,13 +114,13 @@ getPresenceExit:
 
 	#A - Calculates the presenceVector's address to be changed
 	sll	$t4, 	$t0,	2				#Multiply t0 (class' number) by 4 and put the result into t4 (bytes to be moved from presenceVector's base address)
-	add 	$t3, 	$t3, 	$t4				#Add t3 (presenceVector's base) and t4 (bytes to be moved from presenceVector's base address) and put it back into t3 (presenceVector's fully calculated address)
+	add 	$t4, 	$t4, 	$t3				#Add t3 (presenceVector's base) and t4 (bytes to be moved from presenceVector's base address) and put it back into t4 (presenceVector's fully calculated address)
 	
 	#Loads the input from presenceVector
-	lw 	$t5, 	($t3)					#Load word from t3 (presenceVector's fully calculated address) to t5 (presenceVector's value)
+	lw 	$t5, 	($t4)					#Load word from t4 (presenceVector's fully calculated address) to t5 (presenceVector's value)
 
 	#B - Calculates how many mask's bits will be moved
-	la	$t7,	mask					#Load address of mask to t7 (original mask)
+	lw	$t7,	mask					#Load address of mask to t7 (original mask)
 	sllv	$t7,	$t7,	$t1				#Multiply t7 (original mask) by t1 (student's number) and put the result into t7 (mask bits moved for t1 times)	
 	
 	#C - If condition to check if student is or not present
@@ -130,10 +132,10 @@ getPresenceExit:
 	or	$t5,	$t5,	$t7				#OR t7 (changed mask) and t5 (presenceVector's value) then put the result into t5 (presenceVector's changed value)
 	
 	#Stores presenceVector's changed value back
-	sw 	$t5, 	($t3)					#Store word from t5 (presenceVector's changed value) in t3 (presenceVector's fully calculated address)
+	sw 	$t5, 	($t4)					#Store word from t5 (presenceVector's changed value) in t4 (presenceVector's fully calculated address)
 
 	#Restarts the whole loop
-	j 	start						#Jump to start
+	j 	print						#Jump to start
 
 	#Register a ausence
 registerAusence:
@@ -145,7 +147,27 @@ registerAusence:
 	and	$t5,	$t7,	$t5				#OR t7 (XORed mask) and t5 (presenceVector's value) then put the result into t5 (presenceVector's changed value)
 	
 	#Stores presenceVector's changed value back
-	sw 	$t5, 	($t3)					#Store word from t5 (presenceVector's changed value) in t3 (presenceVector's fully calculated address)
+	sw 	$t5, 	($t4)					#Store word from t5 (presenceVector's changed value) in t4 (presenceVector's fully calculated address)
+
+	#Prints the value that has returned to presenceVector and new lines
+print:
+
+	#Prints mensagem4
+	li	$v0, 	4 					#Command to print a text
+	la	$a0, 	message4 				#Load address of message4 to a0
+	syscall 						#Do it
+	
+	#Prints the value that has returned to presenceVector
+	la	$v0,	35					#Command to print a integer as binary
+	la	$a0,	($t5)					#Load word of t5 (presenceVector's value) to a0
+	syscall							#Do it
+	
+	#Prints mensagem5
+	li	$v0, 	4 					#Command to print a text
+	la	$a0, 	message5 				#Load address of message5 to a0
+	syscall 						#Do it
 	
 	#Restarts the whole loop
 	j 	start						#Jump to start
+	
+	
