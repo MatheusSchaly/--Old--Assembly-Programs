@@ -4,7 +4,7 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 1991-2012 Altera Corporation
+Copyright (C) 1991-2013 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -168,6 +168,22 @@ applicable agreement for further details.
 	(rect 1344 384 1520 400)
 	(text "OUTPUT" (rect 1 -1 39 9)(font "Arial" (font_size 6)))
 	(text "MemWrite" (rect 90 0 145 14)(font "Arial" (font_size 8)))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
+)
+(pin
+	(output)
+	(rect 1344 680 1520 696)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "Jump" (rect 90 0 117 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8))
@@ -811,6 +827,66 @@ applicable agreement for further details.
 		(arc (pt 25 35)(pt 49 24)(rect -6 -27 57 36))
 	)
 )
+(symbol
+	(rect 712 672 776 776)
+	(text "AND6" (rect 1 -1 25 9)(font "Arial" (font_size 6)))
+	(text "109" (rect 1 94 18 106)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "IN2" (rect 6 24 23 36)(font "Courier New" (bold))(invisible))
+		(text "IN2" (rect 6 24 23 36)(font "Courier New" (bold))(invisible))
+		(line (pt 0 32)(pt 18 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "IN3" (rect 6 40 23 52)(font "Courier New" (bold))(invisible))
+		(text "IN3" (rect 6 40 23 52)(font "Courier New" (bold))(invisible))
+		(line (pt 0 48)(pt 18 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "IN4" (rect 7 54 24 66)(font "Courier New" (bold))(invisible))
+		(text "IN4" (rect 7 54 24 66)(font "Courier New" (bold))(invisible))
+		(line (pt 0 64)(pt 18 64))
+	)
+	(port
+		(pt 0 16)
+		(input)
+		(text "IN1" (rect 6 8 23 20)(font "Courier New" (bold))(invisible))
+		(text "IN1" (rect 6 8 23 20)(font "Courier New" (bold))(invisible))
+		(line (pt 0 16)(pt 18 16))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "IN5" (rect 6 69 23 81)(font "Courier New" (bold))(invisible))
+		(text "IN5" (rect 6 69 23 81)(font "Courier New" (bold))(invisible))
+		(line (pt 0 80)(pt 18 80))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "IN6" (rect 6 86 23 98)(font "Courier New" (bold))(invisible))
+		(text "IN6" (rect 6 86 23 98)(font "Courier New" (bold))(invisible))
+		(line (pt 0 96)(pt 18 96))
+	)
+	(port
+		(pt 64 56)
+		(output)
+		(text "OUT" (rect 53 47 70 59)(font "Courier New" (bold))(invisible))
+		(text "OUT" (rect 53 47 70 59)(font "Courier New" (bold))(invisible))
+		(line (pt 46 56)(pt 64 56))
+	)
+	(drawing
+		(line (pt 18 43)(pt 33 43))
+		(line (pt 18 69)(pt 34 69))
+		(line (pt 18 99)(pt 18 13))
+		(arc (pt 34 69)(pt 33 43)(rect 20 43 47 70))
+	)
+)
 (connector
 	(pt 8 8)
 	(pt 1864 8)
@@ -1307,30 +1383,6 @@ applicable agreement for further details.
 	(pt 624 1096)
 )
 (connector
-	(pt 336 664)
-	(pt 336 1096)
-)
-(connector
-	(pt 400 648)
-	(pt 400 1096)
-)
-(connector
-	(pt 464 528)
-	(pt 464 1096)
-)
-(connector
-	(pt 528 616)
-	(pt 528 1096)
-)
-(connector
-	(pt 560 392)
-	(pt 560 1096)
-)
-(connector
-	(pt 656 584)
-	(pt 656 1096)
-)
-(connector
 	(pt 984 360)
 	(pt 1128 360)
 )
@@ -1365,6 +1417,98 @@ applicable agreement for further details.
 (connector
 	(pt 1048 344)
 	(pt 1048 536)
+)
+(connector
+	(pt 712 768)
+	(pt 336 768)
+)
+(connector
+	(pt 336 664)
+	(pt 336 768)
+)
+(connector
+	(pt 336 768)
+	(pt 336 1096)
+)
+(connector
+	(pt 712 752)
+	(pt 400 752)
+)
+(connector
+	(pt 400 648)
+	(pt 400 752)
+)
+(connector
+	(pt 400 752)
+	(pt 400 1096)
+)
+(connector
+	(pt 712 736)
+	(pt 464 736)
+)
+(connector
+	(pt 464 528)
+	(pt 464 736)
+)
+(connector
+	(pt 464 736)
+	(pt 464 1096)
+)
+(connector
+	(pt 712 720)
+	(pt 528 720)
+)
+(connector
+	(pt 528 616)
+	(pt 528 720)
+)
+(connector
+	(pt 528 720)
+	(pt 528 1096)
+)
+(connector
+	(pt 712 688)
+	(pt 656 688)
+)
+(connector
+	(pt 656 584)
+	(pt 656 688)
+)
+(connector
+	(pt 656 688)
+	(pt 656 1096)
+)
+(connector
+	(pt 560 704)
+	(pt 712 704)
+)
+(connector
+	(pt 560 392)
+	(pt 560 704)
+)
+(connector
+	(pt 560 704)
+	(pt 560 1096)
+)
+(connector
+	(pt 968 728)
+	(pt 776 728)
+)
+(connector
+	(pt 968 1104)
+	(pt 968 728)
+)
+(connector
+	(pt 1344 688)
+	(pt 968 688)
+)
+(connector
+	(pt 968 184)
+	(pt 968 688)
+)
+(connector
+	(pt 968 688)
+	(pt 968 728)
 )
 (junction (pt 1048 208))
 (junction (pt 656 168))
@@ -1413,11 +1557,20 @@ applicable agreement for further details.
 (junction (pt 1000 584))
 (junction (pt 1032 352))
 (junction (pt 1048 344))
+(junction (pt 336 768))
+(junction (pt 400 752))
+(junction (pt 464 736))
+(junction (pt 528 720))
+(junction (pt 656 688))
+(junction (pt 560 704))
+(junction (pt 968 728))
+(junction (pt 968 688))
 (text "lw" (rect 800 282 814 296)(font "Arial" (font_size 8)))
 (text "sw" (rect 800 386 818 400)(font "Arial" (font_size 8)))
 (text "beq" (rect 800 490 821 504)(font "Arial" (font_size 8)))
 (text "addi" (rect 800 594 823 608)(font "Arial" (font_size 8)))
 (text "R_format" (rect 800 178 851 192)(font "Arial" (font_size 8)))
+(text "jump" (rect 800 698 825 712)(font "Arial" (font_size 8)))
 (title_block
 	(rect 1496 1104 1864 1224)
 	(section (rect 0 0 367 23)(text "TITLE" (rect 3 0 32 12)(font "Courier New" (bold)))(text "Control" (rect 80 2 162 20)(font "Courier New" (color 0 0 0)(font_size 12)(bold)))(border))
@@ -1426,7 +1579,7 @@ applicable agreement for further details.
 	(section (rect 0 72 90 167)(text "SIZE" (rect 3 0 26 12)(font "Courier New" (color 0 0 255)(bold)))(text "D" (rect 40 2 49 18)(font "Courier New" (color 0 0 0)(font_size 10)(bold)))(border))
 	(section (rect 91 72 370 167)(text "NUMBER" (rect 136 0 171 12)(font "Courier New" (color 0 0 255)(bold)))(text "1.00" (rect 189 2 226 18)(font "Courier New" (color 0 0 0)(font_size 10)(bold)))(border))
 	(section (rect 280 72 647 167)(text "REV" (rect 43 0 60 12)(font "Courier New" (color 0 0 255)(bold)))(text "A" (rect 72 2 81 18)(font "Courier New" (color 0 0 0)(font_size 10)(bold)))(border))
-	(section (rect 0 96 239 215)(text "DATE" (rect 3 -8 26 4)(font "Courier New" (color 0 0 255)(bold)))(text "Thu May 23 17:37:15 2013" (rect 48 -6 274 10)(font "Courier New" (color 0 0 0)(font_size 10)(bold)))(date)(border))
+	(section (rect 0 96 239 215)(text "DATE" (rect 3 -8 26 4)(font "Courier New" (color 0 0 255)(bold)))(text "Thu Nov 23 23:43:26 2017" (rect 48 -6 274 10)(font "Courier New" (color 0 0 0)(font_size 10)(bold)))(date)(border))
 	(section (rect 240 96 549 215)(text "SHEET" (rect -13 -8 16 4)(font "Courier New" (color 0 0 255)(bold)))(text "1" (rect 40 -6 49 10)(font "Courier New" (color 0 0 0)(font_size 10)(bold))))
 	(section (rect 310 96 677 215)(text "OF" (rect 2 -8 13 4)(font "Courier New" (color 0 0 255)(bold)))(text "1" (rect 26 -6 35 10)(font "Courier New" (color 0 0 0)(font_size 10)(bold))))
 	(drawing
